@@ -1,0 +1,48 @@
+  <div class="search-form-container">
+    <form class="search-form" [formGroup]="searchform" (ngSubmit)="onCalculateFare()">
+         <mat-radio-group aria-label="Select an option" formControlName="tripType" (change)="onTripTypeSelect()">
+            <mat-radio-button value="oneway">One way</mat-radio-button>
+            <mat-radio-button value="twoway">Two way</mat-radio-button>
+          </mat-radio-group>
+            <mat-form-field>
+                <mat-label>Cars</mat-label>
+                <mat-select formControlName="vehiclePrice">
+                    @for (car of cars ; track car) {
+                        <mat-option [value]="car.price">{{car.name}}</mat-option>
+                        }
+                </mat-select>
+            </mat-form-field>
+
+            <mat-autocomplete #dest="matAutocomplete">
+                @for (destination of destinations; track destination) {
+                <mat-option [value]="destination">{{destination}}</mat-option>
+                }
+            </mat-autocomplete>
+            <mat-form-field color="primary" class="mat-input" appearance="outline" matAutocompleteOrigin #origin="matAutocompleteOrigin">
+                <mat-label>Source</mat-label>
+                <input
+                (input)="onSearch($event,'dest')"
+                matInput
+                formControlName="origin"
+                placeholder="search your source place here..."
+                [matAutocomplete]="dest"
+                [matAutocompleteConnectedTo]="origin">
+            </mat-form-field>
+            <mat-autocomplete #auto="matAutocomplete">
+                @for (origin of origins; track origin) {
+                <mat-option [value]="origin">{{origin}}</mat-option>
+                }
+            </mat-autocomplete>
+            <mat-form-field color="primary" class="mat-input" appearance="outline" matAutocompleteOrigin #origin="matAutocompleteOrigin">
+                <mat-label>Destination</mat-label>
+                <input
+                (input)="onSearch($event,'origin')"
+                matInput
+                formControlName="destination"
+                placeholder="search your destination place here..."
+                [matAutocomplete]="auto"
+                [matAutocompleteConnectedTo]="origin">
+            </mat-form-field>
+            <button mat-flat-button type="submit" [disabled]="searchform.invalid">Calculate Fare</button>
+    </form>
+</div>

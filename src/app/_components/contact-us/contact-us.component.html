@@ -1,0 +1,56 @@
+<div class="contact-us-container">
+    <header class="header">
+            <p>CONTACTS</p>
+    </header>
+    <div class="contactus-cards">
+        <div class="left-section">
+            <header>  
+                24/7 CUSTOMER SUPPORT
+            </header>
+            <p>For any queries our customer support service is available to assist you to resolve the issues with empathy and care.</p>
+            <div class="contact-info">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="call"></mat-icon>
+                <span>9769578581, 7021946907</span>
+            </div>
+            <div class="contact-info">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="my_location"></mat-icon>
+                <span>Old soniya colony, Vithalwadi, Kalyan(E), 421306.</span>
+            </div>
+        </div>
+        <div class="right-section">
+            <form [formGroup]="sendEnquiryForm" (ngSubmit)="onSendEnquiry()">
+                <p class="send-enquiry-title">SEND AN ENQUIRY</p>
+                <mat-form-field color="primary" class="mat-input">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="enter name" formControlName="name">
+                    @if (sendEnquiryForm.get('name').invalid) {
+                        <mat-error>Name field is required</mat-error>
+                      }
+                </mat-form-field>
+                <mat-form-field color="primary" class="mat-input">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="enter email" formControlName="email">
+                    @if (sendEnquiryForm.get('email').invalid) {
+                        <mat-error>Name field is required</mat-error>
+                        }
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Contact no</mat-label>
+                    <input matInput placeholder="enter 10 digit mobile number" formControlName="contact"/>
+                    @if (sendEnquiryForm.get('contact').invalid) {
+                        <mat-error>Contact no field is required</mat-error>
+                      }
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Message</mat-label>
+                    <textarea matInput placeholder="enter your message here" formControlName="message"></textarea>
+                    @if (sendEnquiryForm.get('message').invalid) {
+                        <mat-error>Message field is required</mat-error>
+                      }
+                </mat-form-field>
+                <button mat-flat-button type="submit" [disabled]="sendEnquiryForm.invalid">Send Enquiry</button>
+            </form>
+        </div>
+   </div>
+</div>
+

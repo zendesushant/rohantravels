@@ -1,0 +1,36 @@
+.page-not-found-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translate(-50%, 20%);
+    position: absolute;
+    /* top: 50%; */
+    left: 50%;
+    gap: 30px;
+    .image-404{
+        height: 200px;
+        width:200px;
+    }
+    .pagenotfound{
+        font-family: fantasy;
+        font-size: 1rem;
+        scale: 2;
+        letter-spacing: 1px;
+        color: darkslategray;
+    }   
+    .message{
+        text-align: center;
+        font-family: auto;
+    }
+    button{
+        background-color: orange;
+        color: white;
+        cursor: pointer;
+        padding: 15px;;
+        border-radius: 25px;
+        border: 0px;
+        letter-spacing: 2px;
+        font-family: "Rowdies", sans-serif;
+    }
+}
