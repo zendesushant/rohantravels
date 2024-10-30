@@ -1,8 +1,9 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, ElementRef, inject, Renderer2 } from '@angular/core';
 import { SearchComponent } from '../../_forms/search/search.component';
 import { AppService } from '../../_services/_app/app.service';
 import { JsonPipe } from '@angular/common';
 import { HttpService } from '../../_services/_http/http.service';
+import { flatMap } from 'rxjs';
 
 @Component({
   selector: 'app-pricecalculator',
@@ -23,6 +24,7 @@ export class PricecalculatorComponent {
   driverAllowancePerDay = 300;
   gstPercentage = 0;
   perDayAverage = 300;
+  showTermsAndConditions:boolean = false;
   rental:{car_type:string,car_name:string,seating_capacity:number,half_day_price:number,full_day_price:number,per_hour_price:number,per_km_price:number,extra_km_price:number}[]=[
       {car_type:"Mini",car_name:"Maruti Wagnor", seating_capacity:4, half_day_price:1600,full_day_price:2000,per_hour_price:130,per_km_price:12,extra_km_price:13.5},
       {car_type:"Sedan",car_name:"Swift Dzire",seating_capacity:4, half_day_price:1800,full_day_price:2200,per_hour_price:150,per_km_price:14,extra_km_price:15.5},
@@ -45,7 +47,7 @@ export class PricecalculatorComponent {
 ngOnInit(){
 
 }
-  constructor(){
+constructor(private renderer: Renderer2, private elementRef: ElementRef) {
     effect(() => {
       this.searchData = this.appService.sendSearchData();
       this.httpService.calculateTravelDistanceAndTime(this.searchData.source, this.searchData.destination).subscribe((data:any)=>{
@@ -113,4 +115,14 @@ calculateTwoWayCabFares(km:number){
       let extraKmFare = extraKm * price;
       return extraKmFare;
   }*/
+
+  toggleTermsAndConditions(index:number){
+    this.showTermsAndConditions = !this.showTermsAndConditions;
+    let termsAndConditionsUL = this.renderer.selectRootElement('.terms-and-conditions'+index,true);
+    if(this.showTermsAndConditions){
+      this.renderer.removeStyle(termsAndConditionsUL,'display');
+    }else{
+      this.renderer.setStyle(termsAndConditionsUL,'display','none');
+    }
+  }
 }

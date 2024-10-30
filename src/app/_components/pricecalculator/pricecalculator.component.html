@@ -4,7 +4,7 @@
 <div class="price-calculator-container">
     <app-search></app-search>
     <div class="car-fares-card-container">
-        @for (car of tripResultIteratingArray; track car) {
+        @for (car of tripResultIteratingArray; let index = $index; track car) {
         <div class="car-fares-card">
             <p><b>{{car.car_name}}</b> or similar</p>
             <ul>
@@ -33,15 +33,15 @@
                     <p><b>₹{{car.fare}}</b></p>
                     <button mat-flat-button class="booknow">Book Now</button>
                 </ul>
-                <ul class="terms-and-conditions">
-                    <p>Terms and Conditions</p>
+                <p><b>Terms and Conditions</b><span class="caret-img"><img (click)="toggleTermsAndConditions(index)"src="https://cdn-icons-png.flaticon.com/128/7030/7030537.png"/></span></p>
+                <ul class="terms-and-conditions{{index}}" [style]="{display:'none'}">
                     <li>Your Trip has a KM limit. If your usage exceeds this limit, you will be charged for the excess KM used.</li>
                     <li>We promote cleaner fuel and thus your cab can be a CNG vehicle. The driver may need to fill CNG once or more during your trip. Please cooperate with the driver.</li>
                     @if(searchData.tripType === 'oneway'){
                     <li>Your trip includes one pick up in Pick-up city and one drop to destination city. It does not include within city travel.</li>
                     }
                     <li>If your Trip has Hill climbs, cab AC may be switched off during such climbs.</li>
-                </ul>
+                </ul>  
             </div>
         </div>
         }@empty{
