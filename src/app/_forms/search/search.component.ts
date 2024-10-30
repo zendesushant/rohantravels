@@ -2,60 +2,90 @@ import { Component, inject } from '@angular/core';
 import { HttpService } from '../../_services/_http/http.service';
 import { angularMaterialModules } from '../../_models/angular-material.model';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { JsonPipe, KeyValuePipe } from '@angular/common';
+import { DatePipe, JsonPipe, KeyValuePipe } from '@angular/common';
 import { AppService } from '../../_services/_app/app.service';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { start } from 'repl';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [angularMaterialModules,ReactiveFormsModule,KeyValuePipe,JsonPipe],
+  imports: [angularMaterialModules,ReactiveFormsModule,KeyValuePipe,DatePipe],
+  providers:[provideNativeDateAdapter()],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
 export class SearchComponent {
   searchform:FormGroup | any;
+  datePickerInputDisabled:boolean = true;
   private httpServices = inject(HttpService)
   private appService = inject(AppService)
-  origins:string[] = [];
+  sources:string[] = [];
   destinations:string[] = [];
-  oneWayPrices:{name:string,price:number}[] =[{name:'Sedan',price:16},{name:'Suv',price:20},{name:'Mini',price:15}]
-  twoWayPrices:{name:string,price:number}[] =[{name:'Sedan',price:13},{name:'Suv',price:16},{name:'Mini',price:12}]
-  cars:{name:string,price:number}[] = []
-  // {name:'Sedan',onewayprice:16,twowayprice:13},{name:'Suv',onewayprice:19,twowayprice:16},{name:'Mini',onewayprice:15,twowayprice:12}
+  trips:string[] = ['One way','Two way']
+  ddMmYyyyFormatDate:any
+  showRangeDatePicker:boolean = false;
+  minDate:any
+  endDate:any
   constructor(private fb:FormBuilder){
+
   }
- 
+  
   ngOnInit(){
+    this.minDate = new Date();
+    this.endDate = new Date();
+    this.endDate.setDate(this.endDate.getDate()+2)
     this.searchform = new FormGroup({
       tripType : this.fb.control('oneway', Validators.required),
-      vehiclePrice : this.fb.control('', Validators.required),
-      origin : this.fb.control('', Validators.required),
-      destination: this.fb.control('',[Validators.required])
+      source : this.fb.control('', Validators.required),
+      destination: this.fb.control('',[Validators.required]),
+      pickupDate: this.fb.control(this.minDate,[Validators.required]),
+      startDate : this.fb.control(this.minDate,[Validators.required]),
+      endDate : this.fb.control(this.endDate,[Validators.required])
     })
-    this.onTripTypeSelect();
   }
   onSearch(event:Event,type:string){
     const inputElement = event.target as HTMLInputElement;
     this.httpServices.getPlacesAutoComplete(inputElement.value)
     .subscribe((data:any)=>{
-      if(type === 'origin'){
-        this.origins = data.data
+      if(type === 'source'){
+        this.sources = data.data
       }else{
         this.destinations = data.data
       }
-        
     })
   }
   onCalculateFare(){
-    this.appService.sendSearchData.set(this.searchform.value)
+    var datePipe = new DatePipe('en-US');
+    let formValue = Object.assign(this.searchform.value);
+    if(formValue.tripType==='oneway'){
+          let pickupDate = datePipe.transform(this.searchform.value.pickupDate, 'dd/MM/yyyy');
+          delete formValue.startDate;
+          delete formValue.endDate;
+          formValue.pickupDate = pickupDate;
+    }else{
+          let startDate  = datePipe.transform(this.searchform.value.startDate, 'dd/MM/yyyy');
+          let endDate = datePipe.transform(this.searchform.value.endDate, 'dd/MM/yyyy');
+          let days = Math.ceil(Math.abs(this.calculateNoOfDays(this.searchform.value.startDate,this.searchform.value.endDate)));
+          delete formValue.pickupDate;  
+          formValue.days = days;
+          formValue.startDate = startDate;
+          formValue.endDate = endDate;
+    }
+
+    this.appService.sendSearchData.set(formValue)
   }
 
-  onTripTypeSelect(){
-    let tripType = this.searchform.get('tripType').value;
+  tripSelection(tripType:string){
     if(tripType === 'oneway'){
-        this.cars = this.oneWayPrices;
+      this.showRangeDatePicker = false;
     }else{
-        this.cars = this.twoWayPrices;
+      this.showRangeDatePicker = true;
     }
+  }
+
+  calculateNoOfDays(startDate:any,endDate:any){
+    let time = startDate.getTime() - endDate.getTime();
+    return (time/(1000 * 3600 * 24))
   }
 }

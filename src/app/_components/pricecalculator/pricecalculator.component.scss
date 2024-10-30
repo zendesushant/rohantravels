@@ -1,0 +1,72 @@
+.price-calculator-background{
+        height: 200px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-image: linear-gradient(45deg, #0000006e, rgb(0 0 0 / 41%)), url('https://images.unsplash.com/photo-1610647752706-3bb12232b3ab?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdhZ25vciUyMGNhcnxlbnwwfHwwfHx8MA%3D%3D');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        .title{
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+}
+
+.price-calculator-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+
+    .car-fares-card-container{
+        @extend .price-calculator-container;
+        gap:10px;
+        .car-fares-card{
+            width: 80%;
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 10px 10px 10px 10%;
+            ul{
+                display: flex;
+                gap: 10px;
+                li{
+                    margin-left: 17px; 
+                }
+                .booknow{
+                    background-color: orange;
+                    color: white;
+                    padding: 15px;
+                    width: 150px;
+                    border-radius: 25px;
+                    border: 0px;
+                    cursor: pointer;
+                    letter-spacing: 2px;
+                    font-family: sans-serif;
+                    font-weight: bold;
+                }
+            }
+
+            .inclusion-exclusion-container{
+                display: flex;
+                flex-wrap: wrap;
+                gap: 40px;
+                margin-top: 40px;
+                ul{
+                    display: flex;
+                    flex-direction: column;
+                    p{
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+    
+}
