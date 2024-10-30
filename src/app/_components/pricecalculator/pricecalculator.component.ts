@@ -38,10 +38,10 @@ export class PricecalculatorComponent {
       {car_type:"Mpv",car_name:"Toyoto Innova Crysta",seating_capacity:7, price:22,left_over_price:21,extra_km_price:24.25}
     ]
   oneWayRentalCabs:{}[] = [];
-  oneWayOutstaionCabs:{}[] = [];
+  oneWayOutstaionCabs:{car_type:string,car_name:string,seating_capacity:number,fare:number,distance_included:number,extra_km_price:number}[] = [];
   twoWayRentalCabs:{}[] = [];
-  twoWayOutstaionCabs:{}[] = [];
-  tripResultIteratingArray:{}[] = [];
+  twoWayOutstaionCabs:{car_type:string,car_name:string,seating_capacity:number,fare:number,distance_included:number,extra_km_price:number}[] = [];
+  tripResultIteratingArray:{car_type:string,car_name:string,seating_capacity:number,fare:number,distance_included:number,extra_km_price:number}[] = [];
 ngOnInit(){
 
 }
