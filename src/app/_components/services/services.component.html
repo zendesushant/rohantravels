@@ -1,0 +1,21 @@
+<div class="services-container">
+    <header class="header">
+            <p>SERVICES</p>
+    </header>
+    <div class="services">
+        <p class="title">OUR SERVICES</p>
+        <p class="tagline">All the cabs available with us all regularly maintained and checked to ensure their efficacy is maintained and their performance is retained. Our fleets are equipped with all the modern features to provide maximum comfort to our customers. We assure you of a safe, comfortable, and convenient journey with our specialized taxi service.</p>
+        <div class="services-card-container">
+            @for(service of ourServices; let i = $index; track service){
+                <div>
+                    <img [src]="service.img"/>
+                    <p class="service-title">{{service.title}}</p>
+                    <p class="service-description">{{service.description}}</p>
+                </div>
+            }
+            @empty{
+
+            }
+            </div>
+    </div>
+</div>

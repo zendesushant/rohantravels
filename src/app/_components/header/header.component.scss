@@ -1,0 +1,28 @@
+.header-container{
+    display: flex;
+    gap: 40px;
+    list-style-type: none;
+    justify-content: center;
+    height: 100px;
+    width: 100%;
+    color: white;
+    letter-spacing: 2px;
+    align-items: center;
+    background-color: #1a1b1f;
+    z-index: 1;
+    li{
+        border: 0px solid white;
+        font-weight: bold;
+        &:hover{
+            color: orange;
+            cursor: pointer;
+            transition: background-color 0.7s ease;
+        }
+    }
+
+    .active{
+            color: orange;
+            cursor: pointer;
+            transition: background-color 0.7s ease;  
+    }
+}

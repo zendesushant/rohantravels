@@ -1,0 +1,62 @@
+  <div class="search-form-container">
+    <form class="search-form" [formGroup]="searchform" (ngSubmit)="onCalculateFare()">
+         <mat-radio-group aria-label="Select an option" formControlName="tripType">
+            <mat-radio-button value="oneway" (change)="tripSelection('oneway')">One way</mat-radio-button>
+            <mat-radio-button value="twoway" (change)="tripSelection('twoway')">Two way</mat-radio-button>
+          </mat-radio-group>
+          <div class="inp-fields">
+            <mat-autocomplete #auto="matAutocomplete">
+                @for (source of sources; track source) {
+                <mat-option [value]="source">{{source}}</mat-option>
+                }
+            </mat-autocomplete>
+            <mat-form-field color="primary" class="mat-input" matAutocompleteOrigin #origin="matAutocompleteOrigin">
+                <mat-label>From</mat-label>
+                <input
+                (input)="onSearch($event,'source')"
+                matInput
+                formControlName="source"
+                placeholder="search your source place here..."
+                [matAutocomplete]="auto"
+                [matAutocompleteConnectedTo]="origin">
+            </mat-form-field>
+            <mat-autocomplete #dest="matAutocomplete">
+                @for (destination of destinations; track destination) {
+                <mat-option [value]="destination">{{destination}}</mat-option>
+                }
+            </mat-autocomplete>
+            <mat-form-field color="primary" class="mat-input" matAutocompleteOrigin #destination="matAutocompleteOrigin">
+                <mat-label>To</mat-label>
+                <input
+                (input)="onSearch($event,'destination')"
+                matInput
+                formControlName="destination"
+                placeholder="search your destination place here..."
+                [matAutocomplete]="dest"
+                [matAutocompleteConnectedTo]="destination">
+            </mat-form-field>
+            @if(!showRangeDatePicker){
+            <mat-form-field>
+                <mat-label>Pickup Date</mat-label>
+                <input [disabled]="datePickerInputDisabled" [min]="minDate" matInput [matDatepicker]="picker" formControlName="pickupDate">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            }@else{
+            <mat-form-field>
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input [min]="minDate" [rangePicker]="picker">
+                  <input formControlName="startDate"  matStartDate placeholder="Start date">
+                  <input formControlName="endDate" matEndDate placeholder="End date">
+                </mat-date-range-input>
+                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+            }
+        </div>
+        <button mat-flat-button type="submit" [disabled]="searchform.invalid">Calculate Fare</button>
+        <ng-content></ng-content>
+    </form>
+</div>

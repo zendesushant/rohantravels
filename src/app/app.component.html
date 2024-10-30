@@ -1,0 +1,11 @@
+@if(authService.isAuthenticated()){
+    <app-header></app-header>
+}
+<router-outlet></router-outlet>
+
+<ngx-spinner>
+  <div class="la-square-jelly-box la-2x">
+      <div></div>
+      <div></div>
+  </div>
+</ngx-spinner>
