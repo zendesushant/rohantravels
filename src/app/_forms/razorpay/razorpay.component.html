@@ -1,0 +1,14 @@
+
+
+<div class="payment-container">
+  <h1>Razorpay Payment Gateway Integration</h1>
+  <form [formGroup]="paymentForm" (ngSubmit)="onPayNow()">
+    <mat-form-field color="primary" class="mat-input" appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input type="number" formControlName="amount">
+    </mat-form-field>
+    <button mat-flat-button type="submit" class="pay-now-btn">Pay Now</button>
+  </form>
+</div>
+
+<a href="razorpay.me/@friocabservices">Pay via razorpay link</a>

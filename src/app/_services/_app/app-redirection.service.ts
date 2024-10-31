@@ -18,6 +18,14 @@ export class AppRedirectionService{
         this.router.navigate(['/home']);
     }
 
+    redirectToPaymentGateway(){
+        this.router.navigate(['/payment']);
+    }
+
+    redirectToBookingCustomerDetails(){
+        this.router.navigate(['/customer-details']);
+    }
+
     redirectToEnquirySuccessFailurePage(){
         this.router.navigate(['/enquiry']);
     }

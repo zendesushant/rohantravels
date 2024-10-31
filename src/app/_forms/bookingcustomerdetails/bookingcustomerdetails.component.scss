@@ -1,0 +1,25 @@
+.customer-details-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+
+    .customer-details-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 20px;
+
+        mat-form-field{ 
+            width: 70%;
+        }
+
+        .proceed-btn{
+            border-radius: 5px;
+            width: 70%;
+        }
+    }
+}

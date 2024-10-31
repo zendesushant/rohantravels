@@ -4,6 +4,8 @@ import { AppService } from '../../_services/_app/app.service';
 import { JsonPipe } from '@angular/common';
 import { HttpService } from '../../_services/_http/http.service';
 import { flatMap } from 'rxjs';
+import { Router } from '@angular/router';
+import { AppRedirectionService } from '../../_services/_app/app-redirection.service';
 
 @Component({
   selector: 'app-pricecalculator',
@@ -15,6 +17,7 @@ import { flatMap } from 'rxjs';
 export class PricecalculatorComponent {
   private appService = inject(AppService)
   private httpService = inject(HttpService)
+  private appRedirection = inject(AppRedirectionService);
   searchData:any = {};
   distanceResult:any = {};
   travelDistance:string =''
@@ -124,5 +127,9 @@ calculateTwoWayCabFares(km:number){
     }else{
       this.renderer.setStyle(termsAndConditionsUL,'display','none');
     }
+  }
+
+  proceed(){
+    this.appRedirection.redirectToBookingCustomerDetails();
   }
 }

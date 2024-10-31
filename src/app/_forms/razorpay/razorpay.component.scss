@@ -1,0 +1,22 @@
+.payment-container {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .payment-container title {
+    margin-bottom: 20px;
+  }
+  
+  .payment-container .pay-now-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #3399cc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .payment-container .pay-now-btn:hover {
+    background-color: #287ab6;
+  }

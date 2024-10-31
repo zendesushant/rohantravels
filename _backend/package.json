@@ -23,6 +23,7 @@
     "mongoose-unique-validator": "^5.0.1",
     "nodemailer": "^6.9.15",
     "nodemon": "^3.1.5",
+    "razorpay": "^2.9.5",
     "use-places-autocomplete": "^4.0.1"
   },
   "devDependencies": {

@@ -1,0 +1,29 @@
+
+<div class="customer-details-container">
+    <h1>Contact Details</h1>
+    <hr>
+    <form class="customer-details-form" [formGroup]="customerDetails" (ngSubmit)="onProceed()">
+      <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name">
+          @if (customerDetails.get('name').invalid) {
+            <mat-error>Name field is required</mat-error>
+          }
+      </mat-form-field>
+      <mat-form-field class="mat-input">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email">
+          @if (customerDetails.get('email').invalid) {
+            <mat-error>Email field is required</mat-error>
+          }
+      </mat-form-field>
+      <mat-form-field class="mat-input">
+          <mat-label>Mobile</mat-label>
+          <input matInput type="number" formControlName="mobile">
+          @if (customerDetails.get('mobile').invalid) {
+            <mat-error>Mobile field is required</mat-error>
+          }
+      </mat-form-field>
+      <button mat-flat-button type="submit" class="proceed-btn" [disabled]="!customerDetails.valid">Proceed</button>
+    </form>
+  </div>

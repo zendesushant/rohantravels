@@ -31,7 +31,7 @@
                 </ul>
                 <ul>
                     <p><b>₹{{car.fare}}</b></p>
-                    <button mat-flat-button class="booknow">Book Now</button>
+                    <button mat-flat-button class="booknow" (click)="proceed()">Book Now</button>
                 </ul>
                 <p><b>Terms and Conditions</b><span class="caret-img"><img (click)="toggleTermsAndConditions(index)"src="https://cdn-icons-png.flaticon.com/128/7030/7030537.png"/></span></p>
                 <ul class="terms-and-conditions{{index}}" [style]="{display:'none'}">

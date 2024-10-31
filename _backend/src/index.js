@@ -6,6 +6,7 @@ const homeRouter = require('./router/home/home-router');
 const mapRouter = require('./router/map/map-router');
 const serviceRouter = require('./router/services/services-router');
 const emailRouter = require('./router/email/email-router');
+const paymentRouter = require('./router/payment/payment-router');
 const app=express();
 const port=process.env.port||3000;
 
@@ -19,6 +20,7 @@ app.use((req,res,next)=>{
 
 app.use(authRouter);
 app.use(mapRouter);
+app.use(paymentRouter);
 app.use(homeRouter);
 app.use(serviceRouter);
 app.use(emailRouter);

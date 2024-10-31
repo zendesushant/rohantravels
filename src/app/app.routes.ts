@@ -11,6 +11,8 @@ import { PagenotfoundComponent } from './_components/pagenotfound/pagenotfound.c
 import { SendEnquirySuccessFailureComponent } from './_components/send-enquiry-success-failure/send-enquiry-success-failure.component';
 import { canActivateGuard, loggedInGuard } from './_services/_guards/auth-guard.service';
 import { PricecalculatorComponent } from './_components/pricecalculator/pricecalculator.component';
+import { RazorpayComponent } from './_forms/razorpay/razorpay.component';
+import { BookingcustomerdetailsComponent } from './_forms/bookingcustomerdetails/bookingcustomerdetails.component';
 
 export const routes: Routes = [
     {path:'', redirectTo:'login', pathMatch:'full'},
@@ -21,6 +23,8 @@ export const routes: Routes = [
     {path:'services',component:ServicesComponent,canActivate:[canActivateGuard],resolve:{services:serviceResolver}},
     {path:'fares',component:PricecalculatorComponent,canActivate:[canActivateGuard]},
     {path:'contactus',component:ContactUsComponent,canActivate:[canActivateGuard]},
+    {path:'customer-details',component:BookingcustomerdetailsComponent,canActivate:[canActivateGuard]},
+    {path:'payment',component:RazorpayComponent,canActivate:[canActivateGuard]},
     {path:'enquiry',component:SendEnquirySuccessFailureComponent,canActivate:[canActivateGuard]},
     {path:'**',component:PagenotfoundComponent,canActivate:[canActivateGuard]}
 ];
